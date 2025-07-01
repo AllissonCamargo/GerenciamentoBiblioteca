@@ -7,18 +7,20 @@ public class Livro {
     private String isbn;
     private String nomeLivro;
     private String generoLivro;
+    private String autor;
     private LocalDateTime inicioEmprestimo;
     private LocalDateTime fimEmprestimo;
     private boolean status;
 
 
-    public Livro(String isbn, String nomeLivro, String generoLivro, LocalDateTime inicioEmprestimo, LocalDateTime fimEmprestimo, boolean status){
+    public Livro(String isbn, String nomeLivro, String generoLivro, String autor){
         this.isbn = isbn;
         this.nomeLivro = nomeLivro;
         this.generoLivro = generoLivro;
+        this.autor = autor;
         this.inicioEmprestimo = inicioEmprestimo;
         this.fimEmprestimo = fimEmprestimo;
-        this.status = status;
+        this.status = true;
     }
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -45,6 +47,10 @@ public class Livro {
 
     public String getGeneroLivro() {
         return generoLivro;
+    }
+
+    public String getAutor(){
+        return autor;
     }
 
     public LocalDateTime getInicioEmprestimo() {

@@ -12,7 +12,7 @@ public class Aluno extends Pessoa {
 	private int limiteLivrosEmprestimo = 3;
 
 
-	public Aluno(String nome, int idade, String email, String cpf, String matricula, String turno, String curso, int limiteLivrosEmprestimo, int LimiteDiasEmprestimo) {
+	public Aluno(String nome, int idade, String email, String cpf, String matricula, String turno, String curso) {
 		super(nome, idade, email, cpf);
 		this.matricula = matricula;
 		this.turno = turno;
@@ -59,8 +59,8 @@ public class Aluno extends Pessoa {
 
 	@Override
 	public void exibirDados() {
-		System.out.println(" - Aluno: " + getNome() + " | Idade: " + getIdade() + " | CPF: " + getCpf() + " | Matricula: " + getMatricula() + " | Turno: " + getTurno()
-				+ " | Curso: " + getCurso());
+		System.out.println(" - Aluno: " + getNome() + "\n | Idade: " + getIdade() + "\n | CPF: " + getCpf() + "\n | Matricula: " + getMatricula() + "\n | Turno: " + getTurno()
+				+ "\n | Curso: " + getCurso());
 
 	}
 

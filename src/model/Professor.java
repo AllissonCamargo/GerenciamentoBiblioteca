@@ -10,7 +10,7 @@ public class Professor extends Pessoa{
     private int prazoDiasEmprestimoProfessor;
     private List<Livro> livrosEmprestados;
 
-    public Professor(String nome, int idade, String email, String cpf, int idProfessor, String disciplina,  int prazoDiasEmprestimoProfessor){
+    public Professor(String nome, int idade, String email, String cpf, int idProfessor, String disciplina){
         super(nome, idade, email, cpf);
         this.idProfessor = idProfessor;
         this.disciplina = disciplina;
