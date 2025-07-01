@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Livro {
     private String isbn;
@@ -20,6 +21,7 @@ public class Livro {
         this.status = status;
     }
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
 
     @Override
@@ -69,6 +71,7 @@ public class Livro {
         this.inicioEmprestimo = null;
         this.fimEmprestimo = null;
     }
+
 
 
 

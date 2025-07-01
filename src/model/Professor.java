@@ -65,10 +65,12 @@ public class Professor extends Pessoa{
 
 
     public void fazerEmprestimo(Livro livro){
-        if (limiteLivrosProfessor > livrosEmprestados.size()){
-            livro.emprestar(getPrazoDiasEmprestimoProfessor());
+        if (!livrosEmprestados.contains(livro) && limiteLivrosProfessor > livrosEmprestados.size()){
+            livro.emprestar(prazoDiasEmprestimoProfessor);
             this.livrosEmprestados.add(livro);
             this.limiteLivrosProfessor -= 1;
+        } else {
+            System.out.println("Você já emprestou esse livro.");
         }
     }
 
@@ -76,13 +78,16 @@ public class Professor extends Pessoa{
         if (livrosEmprestados.isEmpty()){
             System.out.println("Nenhum livro foi emprestado para este usuário.");
         } else {
-            System.out.println("============= LIVROS EMPRESTADOS ============");
+            System.out.println();
             System.out.println("Professor(a): " + this.getNome());
+            System.out.println("============= LIVROS EMPRESTADOS ============");
             System.out.println();
             for (Livro livro : livrosEmprestados){
                 System.out.println("Nome: " + livro.getNomeLivro());
                 System.out.println("Gênero: " + livro.getGeneroLivro());
                 System.out.println("ISBN: " + livro.getIsbn());
+                System.out.println("Data de empréstimo: " + livro.getInicioEmprestimo().format(livro.formatter));
+                System.out.println("Data de devolução: " + livro.getFimEmprestimo().format(livro.formatter));
                 System.out.println("-------------------------------");
                 System.out.println();
             }
