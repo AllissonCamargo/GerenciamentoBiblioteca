@@ -83,5 +83,5 @@ aluno.realizarEmprestimo(livro);
 
 ## 👨‍💻 Autor
 
-- Desenvolvido por **[Seu Nome Aqui]**
+- Desenvolvido por **Allisson de Camargo**
 - Projeto educacional para praticar **POO em Java**
