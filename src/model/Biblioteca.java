@@ -50,11 +50,12 @@ public class Biblioteca {
         }
     }
 
-    public boolean atualizarUsuario(String cpf, String novoNome, String novoEmail, String disciplina){
+    public boolean atualizarUsuario(String cpf, String novoNome, String novoEmail, int idade, String disciplina){
         for (Pessoa usuario : usuarios){
             if (usuario.getCpf().equals(cpf)){
                 usuario.setNome(novoNome);
                 usuario.setEmail(novoEmail);
+                usuario.setIdade(idade);
                 return true;
             }
         }

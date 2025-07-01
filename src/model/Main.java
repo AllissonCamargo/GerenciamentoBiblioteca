@@ -12,18 +12,18 @@ public class Main {
 
 		// 								============ usuários ==========
 		// Professores
-		Professor shireyShirleyDaCostaMonteiro = new Professor("Shirey Shirley da Costa Monteiro", 25,
+		Professor ShirleyDaCostaMonteiro = new Professor("Shirey Shirley da Costa Monteiro", 25,
 				"shirley.monteiro@ifap.edu.br", "892.015.870-31",
 				3441128, "Programação Orientada a Objetos - Graduação",  7);
 
+		ShirleyDaCostaMonteiro.fazerEmprestimo(l1);
 
 		// Alunos
 
 
 
 
-
-		gerenciamento.adicionarUsuario(shireyShirleyDaCostaMonteiro);
+		gerenciamento.adicionarUsuario(ShirleyDaCostaMonteiro);
 
 
 		// métodos nos livros
@@ -34,7 +34,8 @@ public class Main {
 		gerenciamento.listarProfessoresCadastrados();
 
 
-		gerenciamento.atualizarUsuario("892.015.870-31", "Shirley da Costa Monteiro", "novo shirley.monteiro@ifap.edu.br", "Redes remotas");
+		gerenciamento.atualizarUsuario("892.015.870-31", "Shirley da Costa Monteiro", "novo shirley.monteiro@ifap.edu.br", 28, "Programação orientada a objetos");
+
 
 
 		gerenciamento.listarDadosProfessores();

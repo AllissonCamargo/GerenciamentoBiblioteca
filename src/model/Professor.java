@@ -46,16 +46,9 @@ public class Professor extends Pessoa{
         return limiteLivrosProfessor;
     }
 
-    public void setLimiteLivrosProfessor(int limiteLivrosProfessor){
-        this.limiteLivrosProfessor = limiteLivrosProfessor;
-    }
 
     public int getPrazoDiasEmprestimoProfessor(){
         return prazoDiasEmprestimoProfessor;
-    }
-
-    public void setPrazoDiasEmprestimoProfessor(int prazoDiasEmprestimoProfessor){
-        this.prazoDiasEmprestimoProfessor = prazoDiasEmprestimoProfessor;
     }
 
 
