@@ -48,7 +48,7 @@ public abstract class Pessoa {
 	
 	public abstract void exibirDados();
 	
-	
+	public abstract void listarLivrosEmprestados();
 	
 	
 	

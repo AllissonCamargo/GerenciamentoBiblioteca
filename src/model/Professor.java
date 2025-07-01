@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends Pessoa{
@@ -10,11 +11,11 @@ public class Professor extends Pessoa{
     private List<Livro> livrosEmprestados;
 
     public Professor(String nome, int idade, String email, String cpf, int idProfessor, String disciplina,  int prazoDiasEmprestimoProfessor){
-
         super(nome, idade, email, cpf);
         this.idProfessor = idProfessor;
         this.disciplina = disciplina;
         this.prazoDiasEmprestimoProfessor = prazoDiasEmprestimoProfessor;
+        this.livrosEmprestados = new ArrayList<>();
     }
 
 
@@ -29,8 +30,8 @@ public class Professor extends Pessoa{
         return idProfessor;
     }
 
-    public int setIdProfessor(int idProfessor){
-        return this.idProfessor = idProfessor;
+    public void setIdProfessor(int idProfessor){
+        this.idProfessor = idProfessor;
     }
 
 
@@ -51,20 +52,41 @@ public class Professor extends Pessoa{
         return prazoDiasEmprestimoProfessor;
     }
 
+    public List<Livro> getLivrosEmprestados(){
+        return livrosEmprestados;
+    }
+
 
     @Override
     public void exibirDados(){
         System.out.println("Professor: " + getNome() + "\nID: " + getIdProfessor() + "\nDisciplina: " + getDisciplina() +
-                "\nLimite de aluguel: " + limiteLivrosProfessor + "\nPrazo para devolução: " + getPrazoDiasEmprestimoProfessor() + " dias.");
+                "\nLimite de livros para alugar: " + limiteLivrosProfessor + "\nPrazo de dias para devolução: " + getPrazoDiasEmprestimoProfessor() + " dias.");
     }
 
-    public boolean fazerEmprestimo(Livro livro){
-        if (livrosEmprestados.size() < limiteLivrosProfessor && livro.isDisponivel()){
+
+    public void fazerEmprestimo(Livro livro){
+        if (limiteLivrosProfessor > livrosEmprestados.size()){
             livro.emprestar(getPrazoDiasEmprestimoProfessor());
-            livrosEmprestados.add(livro);
-            return true;
+            this.livrosEmprestados.add(livro);
+            this.limiteLivrosProfessor -= 1;
         }
-        return false;
+    }
+
+    public void listarLivrosEmprestados() {
+        if (livrosEmprestados.isEmpty()){
+            System.out.println("Nenhum livro foi emprestado para este usuário.");
+        } else {
+            System.out.println("============= LIVROS EMPRESTADOS ============");
+            System.out.println("Professor(a): " + this.getNome());
+            System.out.println();
+            for (Livro livro : livrosEmprestados){
+                System.out.println("Nome: " + livro.getNomeLivro());
+                System.out.println("Gênero: " + livro.getGeneroLivro());
+                System.out.println("ISBN: " + livro.getIsbn());
+                System.out.println("-------------------------------");
+                System.out.println();
+            }
+        }
     }
 
 

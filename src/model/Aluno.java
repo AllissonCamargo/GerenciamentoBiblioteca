@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Aluno extends Pessoa{
@@ -17,7 +18,7 @@ public class Aluno extends Pessoa{
 		this.matricula = matricula;
 		this.turno = turno;
 		this.curso = curso;
-		this.livrosEmprestados = null;
+		this.livrosEmprestados = new ArrayList<>();
 		this.LimiteDiasEmprestimo = LimiteDiasEmprestimo;
 	}
 
@@ -70,6 +71,8 @@ public class Aluno extends Pessoa{
 			livro.emprestar(getLimiteDiasEmprestimo());
 			livrosEmprestados.add(livro);
 			return true;
+		}else {
+			System.out.println("Não é possível emprestar mais nenhum livro.");
 		}
 		return false;
 		
@@ -79,6 +82,12 @@ public class Aluno extends Pessoa{
 	public void devolverLivro(Livro livro){
 		livrosEmprestados.remove(livro);
 	}
-	
-	
+
+	@Override
+	public void listarLivrosEmprestados() {
+		System.out.println("============= LIVROS EMPRESTADOS ============");
+		for (Livro livro : livrosEmprestados){
+			System.out.println(livro.getNomeLivro());
+		}
+	}
 }

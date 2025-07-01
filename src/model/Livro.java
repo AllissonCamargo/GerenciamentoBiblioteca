@@ -20,6 +20,14 @@ public class Livro {
         this.status = status;
     }
 
+
+
+    @Override
+    public String toString() {
+        return nomeLivro + " (ISBN: " + isbn + ")";
+    }
+
+
     public boolean isDisponivel(){
         return status;
     }
