@@ -1,9 +1,12 @@
 package model;
 
+import model.gerenciamento.Livro;
+import model.usuarios.Pessoa;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Professor extends Pessoa{
+public class Professor extends Pessoa {
     private int idProfessor;
     private String disciplina;
     private int limiteLivrosProfessor = 5;

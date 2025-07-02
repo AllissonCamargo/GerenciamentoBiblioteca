@@ -1,5 +1,8 @@
 package model;
 
+import model.gerenciamento.Livro;
+import model.usuarios.Pessoa;
+
 import java.util.ArrayList;
 import java.util.List;
 

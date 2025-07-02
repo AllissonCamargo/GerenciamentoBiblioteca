@@ -108,11 +108,15 @@ public class Biblioteca {
         }
     }
 
-    public void removerLivro(Livro livro){
-        if (livros.contains(livro)){
-            livros.remove(livro);
-        } else {
-            System.out.println("Não existe esse livro na lista.");
+    public void removerLivro(String isbn){
+        for (Livro livro : livros){
+            if (livro.getIsbn().equals(isbn)){
+                if (livro.isDisponivel()){
+                    livros.remove(livro);
+                }else {
+                    System.out.println("Este livro está emprestado para um usuário ou não está mais disponível.");
+                }
+            }
         }
     }
 
