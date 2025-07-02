@@ -1,7 +1,6 @@
-package model;
+package model.usuarios;
 
 import model.gerenciamento.Livro;
-import model.usuarios.Pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ public class Aluno extends Pessoa {
 		this.turno = turno;
 		this.curso = curso;
 		this.livrosEmprestados = new ArrayList<>();
-		this.LimiteDiasEmprestimo = LimiteDiasEmprestimo;
+		this.LimiteDiasEmprestimo = 3;
 	}
 
 
@@ -59,6 +58,13 @@ public class Aluno extends Pessoa {
 		return LimiteDiasEmprestimo;
 	}
 
+	public int getLimiteLivrosEmprestimo() {
+		return limiteLivrosEmprestimo;
+	}
+
+	public List<Livro> getLivrosEmprestados() {
+		return livrosEmprestados;
+	}
 
 	@Override
 	public void exibirDados() {

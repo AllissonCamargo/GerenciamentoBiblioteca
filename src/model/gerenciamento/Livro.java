@@ -1,4 +1,4 @@
-package model;
+package model.gerenciamento;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,14 +23,13 @@ public class Livro {
         this.status = true;
     }
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    public DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
 
     @Override
     public String toString() {
         return nomeLivro + " (ISBN: " + isbn + ")";
     }
-
 
     public boolean isDisponivel(){
         return status;
@@ -78,6 +77,15 @@ public class Livro {
         this.fimEmprestimo = null;
     }
 
+
+    public void dadosLivro(){
+        System.out.println("Livro encontrado.");
+        System.out.println();
+        System.out.println("Nome: " + nomeLivro);
+        System.out.println("Gênero: " + generoLivro);
+        System.out.println("Autor: " + autor);
+        System.out.println("ISBN: " + isbn);
+    }
 
 
 
