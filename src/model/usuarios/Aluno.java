@@ -9,7 +9,7 @@ public class Aluno extends Pessoa {
 	private String turno;
 	private String curso;
 	private List<Livro> livrosEmprestadosAluno;
-	private int LimiteDiasEmprestimo = 3;
+	private int LimiteDiasEmprestimo;
 	private int limiteLivrosEmprestimo = 3;
 
 
@@ -61,6 +61,10 @@ public class Aluno extends Pessoa {
 		return limiteLivrosEmprestimo;
 	}
 
+	public void setLivrosEmprestadosAluno(List<Livro> livrosEmprestadosAluno) {
+		this.livrosEmprestadosAluno = livrosEmprestadosAluno;
+	}
+
 	public List<Livro> getLivrosEmprestadosAluno(){
 		return livrosEmprestadosAluno;
 	}
@@ -82,7 +86,7 @@ public class Aluno extends Pessoa {
 		if (livrosEmprestadosAluno.size() > limiteLivrosEmprestimo){
 			System.out.println("Limite máximo de emprestimo atingido.");
 		}
-		if (!livrosEmprestadosAluno.contains(livro) && livro.isDisponivel()) {
+		if (!livrosEmprestadosAluno.contains(livro) && livro.getStatus()) {
 			livrosEmprestadosAluno.add(livro);
 			livro.emprestar(getLimiteDiasEmprestimo());
 			return true;
@@ -92,16 +96,15 @@ public class Aluno extends Pessoa {
 	}
 
 
-	public void FazerDevolucaoLivro(Livro livro) {
-		if (livrosEmprestadosAluno.contains(livro)){
-			System.out.println("Livro devolvido.");
+	public void fazerDevolucaoLivro(Livro livro) {
+		if (livrosEmprestadosAluno.contains(livro)) {
 			livrosEmprestadosAluno.remove(livro);
-			limiteLivrosEmprestimo += 1;
 			livro.devolverLivro();
+			System.out.println("Livro devolvido com sucesso.");
 		} else {
-			System.out.println("Este livro não foi emprestado.");
+			System.out.println("Este livro não foi emprestado por este aluno.");
 		}
-
 	}
+
 
 }

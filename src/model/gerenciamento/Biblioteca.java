@@ -25,7 +25,7 @@ public class Biblioteca {
     }
 
 
-    	
+
 
     public void listarLivros(){
         if (livros.isEmpty()){
@@ -33,7 +33,7 @@ public class Biblioteca {
             System.out.println("Nenhum livro cadastrado.");
         }
         for (Livro livro : livros){
-            if (livro.isDisponivel()){
+            if (livro.getStatus()){
                 System.out.println("------------------------------");
                 livro.dadosLivro();
                 System.out.println("-----------------------------");
@@ -44,20 +44,27 @@ public class Biblioteca {
     }
 
 
-   public void listarLivrosEmprestados(){
-    if (livros.isEmpty()) {
-        System.out.println("A lista de livros está vazia.");
-        return;
-    }
-    for (Livro livro : livros){
-        if (livro.getStatus() == false){
-            System.out.println("------------------------------");
-            livro.dadosLivro();
-            System.out.println("-----------------------------");
+    public void listarLivrosEmprestados() {
+        if (livros.isEmpty()) {
+            System.out.println("A lista de livros está vazia.");
+            return;
         }
-        return;
+
+        boolean encontrou = false;
+
+        for (Livro livro : livros) {
+            if (!livro.getStatus()) {
+                encontrou = true;
+                System.out.println("------------------------------");
+                livro.dadosLivro();
+                System.out.println("-----------------------------");
+            }
+        }
+
+        if (!encontrou) {
+            System.out.println("Nenhum livro está emprestado.");
+        }
     }
-   }
 
 
 
@@ -123,7 +130,7 @@ public class Biblioteca {
         }
         for (Livro livro : livros){
             if (livro.getIsbn().equals(isbn)){
-                if (livro.isDisponivel()){
+                if (livro.getStatus()){
                     System.out.println(livro.getNomeLivro() + " removido com sucesso.");
                     livros.remove(livro);
                     break;
@@ -134,20 +141,22 @@ public class Biblioteca {
         }
     }
 
-    public Livro buscarLivroPorIsbn(String isbn){
-        if (livros.isEmpty()){
-            System.out.println();
+    public Livro buscarLivroPorIsbn(String isbn) {
+        if (livros.isEmpty()) {
             System.out.println("Nenhum livro cadastrado.");
+            return null;
         }
-        for (Livro livro : livros){
-            if (livro.getIsbn().equals(isbn)){
+
+        for (Livro livro : livros) {
+            if (livro.getIsbn().equals(isbn)) {
                 return livro;
-            }else {
-                System.out.println("Livro não encontrado.");
             }
         }
+
+        System.out.println("Livro não encontrado.");
         return null;
     }
+
 
     public void adicionarLivro(Livro livro){
         System.out.println();
@@ -155,57 +164,77 @@ public class Biblioteca {
     }
 
     public void realizarEmprestimo(Pessoa usuario, Livro livro){
-        if (!livro.isDisponivel()){
-            System.out.println("Livro indisponível para emprestimo.");
-            return;
-        }
-        if (usuario instanceof Aluno aluno){
-            if (aluno.getLivrosEmprestadosAluno().size() < aluno.getLimiteLivrosEmprestimo()){
-                livro.emprestar(aluno.getLimiteDiasEmprestimo());
-                System.out.println();
-                System.out.println("******* Livro emprestado com sucesso. *******");
-                System.out.println();
-                System.out.println("Data de emprestimo: " + livro.getInicioEmprestimo().format(formatter));
-                System.out.println("Data de devolução: " + livro.getFimEmprestimo().format(formatter));
-                ((Aluno) usuario).fazerEmprestimo(livro);
-            }
-
-            
-        } else if (usuario instanceof Professor professor) {
-            if (professor.getLivrosEmprestados().size() < professor.getLimiteLivrosProfessor()) {
-                livro.emprestar(professor.getPrazoDiasEmprestimoProfessor());
-                System.out.println();
-                System.out.println("******* Livro emprestado com sucesso. *******");
-                System.out.println();
-                System.out.println("Data de emprestimo: " + livro.getInicioEmprestimo().format(formatter));
-                System.out.println("Data de devolução: " + livro.getFimEmprestimo().format(formatter));
-                ((Professor) usuario).fazerEmprestimo(livro);
-            }
-
-        }
+    if (usuario == null || livro == null){
+        System.out.println("Usuário ou livro inválido.");
+        return;
     }
 
+    if (!livro.getStatus()){
+        System.out.println("Livro indisponível para emprestimo.");
+        return;
+    }
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public void realizarDevolucao(Pessoa usuario, Livro livro){
-        livros.add(livro);
-        if (usuario instanceof Aluno aluno){
-            if (aluno.getLivrosEmprestadosAluno().remove(livro)){
-                livro.devolverLivro();
-                System.out.println("Livro devolvido com sucesso pelo aluno.");
-                System.out.println("Dia da devolução: " + livro.getFimEmprestimo().format(formatter));
-            } else {
-                System.out.println("Este livro não está com esse aluno.");
-            }
-            
-        } else if (usuario instanceof Professor professor) {
-                if (professor.getLivrosEmprestados().remove(livro)){
-                    livro.devolverLivro();
-                    System.out.println("Livro devolvido com sucesso pelo professor.");
-                    System.out.println("Dia da devolução: " + livro.getFimEmprestimo().format(formatter));
-                } else {
-                    System.out.println("Este livro não está com esse Professor.");
-                }
-            }
+    if (usuario instanceof Aluno aluno){
+        if (aluno.getLivrosEmprestadosAluno().size() < aluno.getLimiteLivrosEmprestimo()){
+            livro.emprestar(aluno.getLimiteDiasEmprestimo());
+            System.out.println();
+            System.out.println("******* Livro emprestado com sucesso. *******");
+            System.out.println();
+            System.out.println("Data de emprestimo: " + livro.getInicioEmprestimo().format(formatter));
+            System.out.println("Data de devolução: " + livro.getFimEmprestimo().format(formatter));
+            aluno.fazerEmprestimo(livro);
+        } else {
+            System.out.println("Limite de livros emprestados atingido para aluno.");
         }
+
+
+    } else if (usuario instanceof Professor professor) {
+        if (professor.getLivrosEmprestados().size() < professor.getLimiteLivrosProfessor()) {
+            livro.emprestar(professor.getPrazoDiasEmprestimoProfessor());
+            System.out.println();
+            System.out.println("******* Livro emprestado com sucesso. *******");
+            System.out.println();
+            System.out.println("Data de emprestimo: " + livro.getInicioEmprestimo().format(formatter));
+            System.out.println("Data de devolução: " + livro.getFimEmprestimo().format(formatter));
+            professor.fazerEmprestimo(livro);
+        } else {
+            System.out.println("Limite de livros emprestados atingido para professor.");
+        }
+    } else {
+        System.out.println("Tipo de usuário não suportado para empréstimo.");
+    }
+}
+
+
+
+
+    public void realizarDevolucao(Pessoa usuario, Livro livro) {
+    if (usuario instanceof Aluno aluno) {
+        if (aluno.getLivrosEmprestadosAluno().contains(livro)) {
+            livro.devolverLivro();
+            this.livros.add(livro);
+            System.out.println("Livro devolvido com sucesso pelo aluno.");
+            System.out.println("Dia da devolução: " + livro.getFimEmprestimo().format(formatter));
+            aluno.fazerDevolucaoLivro(livro);
+        } else {
+            System.out.println("Este livro não está com esse aluno.");
+        }
+
+    } else if (usuario instanceof Professor professor) {
+        if (professor.getLivrosEmprestados().remove(livro)) {
+            livro.devolverLivro();
+            this.livros.add(livro);  // adiciona ao acervo apenas se devolução for bem-sucedida
+            System.out.println("Livro devolvido com sucesso pelo professor.");
+            System.out.println("Dia da devolução: " + livro.getFimEmprestimo().format(formatter));
+        } else {
+            System.out.println("Este livro não está com esse professor.");
+        }
+
+    } else {
+        System.out.println("Tipo de usuário não reconhecido.");
+    }
+}
+
 }

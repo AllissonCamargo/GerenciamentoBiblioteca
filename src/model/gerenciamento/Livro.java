@@ -31,10 +31,6 @@ public class Livro {
         return nomeLivro + " (ISBN: " + isbn + ")";
     }
 
-    public boolean isDisponivel(){
-        return status;
-    }
-
 
     public String getIsbn() {
         return isbn;

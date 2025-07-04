@@ -102,7 +102,7 @@ public class Menu {
     public void menuLivros(){
         int opcaoMenuLivro = -1;
         while (opcaoMenuLivro != 0){
-            System.out.println("\n=== MENU USUÁRIOS ===");
+            System.out.println("\n=== MENU LIVROS ===");
             System.out.println("1 - Cadastrar livro");
             System.out.println("2 - Listar livros");
             System.out.println("3 - Buscar por ISBN");
@@ -251,6 +251,7 @@ public class Menu {
 
         System.out.print("ISBN do livro a ser emprestado: ");
         String isbnEmprestimo = scanner.nextLine();
+
         Livro livroEmprestado = biblioteca.buscarLivroPorIsbn(isbnEmprestimo);
 
         if (livroEmprestado == null){
@@ -258,7 +259,7 @@ public class Menu {
             return;
         }
 
-        if (!livroEmprestado.isDisponivel()){
+        if (!livroEmprestado.getStatus()){
             System.out.println();
             System.out.println("Livro não está disponível.");
             return;
@@ -271,6 +272,7 @@ public class Menu {
         System.out.print("CPF do usuário que está devolvendo: ");
         String cpfDevolucao = scanner.nextLine();
         Pessoa usuario = biblioteca.buscarUsuarioPorCpf(cpfDevolucao);
+        System.out.println("CPF devolução: " + cpfDevolucao);
 
         if (usuario == null){
             System.out.println("Usuário não encontrado.");
