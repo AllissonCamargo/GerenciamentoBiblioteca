@@ -1,32 +1,23 @@
 package model.gerenciamento;
-
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import model.usuarios.Aluno;
 import model.usuarios.Pessoa;
 import model.usuarios.Professor;
-
 public class Biblioteca {
     private List<Pessoa> usuarios;
     private List<Professor> professores;
     private List<Aluno> alunos;
     private List<Livro> livros;
 
-
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
-
     public Biblioteca(){
         this.livros = new ArrayList<>();
         this.usuarios = new ArrayList<>();
         this.alunos = new ArrayList<>();
         this.professores = new ArrayList<>();
     }
-
-
-
-
     public void listarLivros(){
         if (livros.isEmpty()){
             System.out.println();
@@ -42,16 +33,12 @@ public class Biblioteca {
             }
         }
     }
-
-
     public void listarLivrosEmprestados() {
         if (livros.isEmpty()) {
             System.out.println("A lista de livros está vazia.");
             return;
         }
-
         boolean encontrou = false;
-
         for (Livro livro : livros) {
             if (!livro.getStatus()) {
                 encontrou = true;
@@ -60,14 +47,10 @@ public class Biblioteca {
                 System.out.println("-----------------------------");
             }
         }
-
         if (!encontrou) {
             System.out.println("Nenhum livro está emprestado.");
         }
     }
-
-
-
 
     public void adicionarUsuario(Pessoa usuario){
         usuarios.add(usuario);
@@ -104,7 +87,6 @@ public class Biblioteca {
 
     }
 
-
     public void listarUsuarios(){
         if (usuarios.isEmpty()){
             System.out.println();
@@ -121,8 +103,6 @@ public class Biblioteca {
             }
         }
     }
-
-
 
     public void removerLivro(String isbn){
         if (livros.isEmpty()){
@@ -157,7 +137,6 @@ public class Biblioteca {
         return null;
     }
 
-
     public void adicionarLivro(Livro livro){
         System.out.println();
         livros.add(livro);
@@ -174,8 +153,6 @@ public class Biblioteca {
         return;
     }
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     if (usuario instanceof Aluno aluno){
         if (aluno.getLivrosEmprestadosAluno().size() < aluno.getLimiteLivrosEmprestimo()){
             livro.emprestar(aluno.getLimiteDiasEmprestimo());
@@ -188,7 +165,6 @@ public class Biblioteca {
         } else {
             System.out.println("Limite de livros emprestados atingido para aluno.");
         }
-
 
     } else if (usuario instanceof Professor professor) {
         if (professor.getLivrosEmprestados().size() < professor.getLimiteLivrosProfessor()) {
@@ -206,9 +182,6 @@ public class Biblioteca {
         System.out.println("Tipo de usuário não suportado para empréstimo.");
     }
 }
-
-
-
 
     public void realizarDevolucao(Pessoa usuario, Livro livro) {
     if (usuario instanceof Aluno aluno) {

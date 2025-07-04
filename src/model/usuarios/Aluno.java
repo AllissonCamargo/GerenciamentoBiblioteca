@@ -1,5 +1,4 @@
 package model.usuarios;
-
 import java.util.ArrayList;
 import java.util.List;
 import model.gerenciamento.Livro;
@@ -22,12 +21,10 @@ public class Aluno extends Pessoa {
 		this.LimiteDiasEmprestimo = 3;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Aluno: " + getNome();
 	}
-
 
 	public String getMatricula() {
 		return matricula;
@@ -69,10 +66,6 @@ public class Aluno extends Pessoa {
 		return livrosEmprestadosAluno;
 	}
 
-	
-
-	
-
 	@Override
 	public void exibirDados() {
 		System.out.println();
@@ -80,7 +73,6 @@ public class Aluno extends Pessoa {
 				+ "\n | Curso: " + getCurso());
 		System.out.println();
 	}
-
 
 	public boolean fazerEmprestimo(Livro livro) {
 		if (livrosEmprestadosAluno.size() > limiteLivrosEmprestimo){
@@ -95,7 +87,6 @@ public class Aluno extends Pessoa {
 
 	}
 
-
 	public void fazerDevolucaoLivro(Livro livro) {
 		if (livrosEmprestadosAluno.contains(livro)) {
 			livrosEmprestadosAluno.remove(livro);
@@ -105,6 +96,5 @@ public class Aluno extends Pessoa {
 			System.out.println("Este livro não foi emprestado por este aluno.");
 		}
 	}
-
 
 }

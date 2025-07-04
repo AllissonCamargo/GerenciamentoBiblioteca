@@ -9,13 +9,10 @@ import model.usuarios.Pessoa;
 import model.usuarios.Professor;
 
 public class Menu {
-
     private Scanner scanner = new Scanner(System.in);
     private Biblioteca biblioteca = new Biblioteca();
-
     public void exibirMenuPrincipal() {
         int opcaoEscolha = -1;
-
         do {
             System.out.println();
             System.out.println("===== MENU PRINCIPAL =====");
@@ -55,7 +52,6 @@ public class Menu {
 
         } while (opcaoEscolha != 0);
     }
-
     public void menuUsuarios(){
         int opcaoMenuUsuarios = -1;
         while (opcaoMenuUsuarios != 0){
@@ -68,7 +64,6 @@ public class Menu {
             System.out.print("Escolha: ");
             opcaoMenuUsuarios = scanner.nextInt();
             scanner.nextLine();
-
             switch (opcaoMenuUsuarios){
                 case 1:
                     cadastrarUsuario();
@@ -98,7 +93,6 @@ public class Menu {
             }
         }
     }
-
     public void menuLivros(){
         int opcaoMenuLivro = -1;
         while (opcaoMenuLivro != 0){
@@ -137,7 +131,6 @@ public class Menu {
             }
         }
     }
-
     public void menuEmprestimo(){
         int opcaoMenuEmprestimo = -1;
         while (opcaoMenuEmprestimo != 0){
@@ -168,9 +161,7 @@ public class Menu {
                     break;
             }
         }
-
     }
-
     private void cadastrarUsuario() {
         System.out.println();
         System.out.print("Tipo de usuário (1 - Aluno | 2 - Professor): ");
@@ -219,7 +210,6 @@ public class Menu {
                 break;
         }
     }
-
     private void cadastrarLivro() {
         System.out.print("Nome do livro: ");
         String nome = scanner.nextLine();
@@ -229,7 +219,6 @@ public class Menu {
         String genero = scanner.nextLine();
         System.out.print("Autor do livro: ");
         String autor = scanner.nextLine();
-
         Livro livro = new Livro(isbn, nome, genero, autor);
         biblioteca.adicionarLivro(livro);
         System.out.println();
@@ -238,7 +227,6 @@ public class Menu {
         System.out.println("===========================");
         livro.dadosLivro();
     }
-
     private void realizarEmprestimo(){
         System.out.print("Digite o CPF do usuário que irá realizar o emprestimo: ");
         String cpfEmprestimo = scanner.nextLine();
@@ -248,26 +236,20 @@ public class Menu {
             System.out.println("Usuário não encontrado.");
             return;
         }
-
         System.out.print("ISBN do livro a ser emprestado: ");
         String isbnEmprestimo = scanner.nextLine();
-
         Livro livroEmprestado = biblioteca.buscarLivroPorIsbn(isbnEmprestimo);
-
         if (livroEmprestado == null){
             System.out.println("Livro não encontrado.");
             return;
         }
-
         if (!livroEmprestado.getStatus()){
             System.out.println();
             System.out.println("Livro não está disponível.");
             return;
         }
-
         biblioteca.realizarEmprestimo(usuario, livroEmprestado);
     }
-
     private void devolverLivro(){
         System.out.print("CPF do usuário que está devolvendo: ");
         String cpfDevolucao = scanner.nextLine();
@@ -278,40 +260,21 @@ public class Menu {
             System.out.println("Usuário não encontrado.");
             return;
         }
-
         System.out.print("ISBN do livro: ");
         String isbnDevolucao = scanner.nextLine();
         Livro livro = biblioteca.buscarLivroPorIsbn(isbnDevolucao);
-
-        
         if (livro == null){
             System.out.println("Livro não encontrado.");
             return;
         }
-        
         System.out.println();
         biblioteca.realizarDevolucao(usuario, livro);
     }
-
 
     private void mostrarLivosEmprestados(){
         biblioteca.listarLivrosEmprestados();
 
     }
-
-
-    // ================ método limpar console ====================
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

@@ -1,5 +1,4 @@
 package model.usuarios;
-
 import java.util.ArrayList;
 import java.util.List;
 import model.gerenciamento.Livro;
@@ -19,13 +18,10 @@ public class Professor extends Pessoa {
         this.livrosEmprestados = new ArrayList<>();
     }
 
-
     @Override
     public String toString(){
         return "Professor: " + getNome();
     }
-
-
 
     public int getIdProfessor(){
         return idProfessor;
@@ -34,7 +30,6 @@ public class Professor extends Pessoa {
     public void setIdProfessor(int idProfessor){
         this.idProfessor = idProfessor;
     }
-
 
     public String getDisciplina() {
         return disciplina;
@@ -48,7 +43,6 @@ public class Professor extends Pessoa {
         return limiteLivrosProfessor;
     }
 
-
     public int getPrazoDiasEmprestimoProfessor(){
         return prazoDiasEmprestimoProfessor;
     }
@@ -57,13 +51,11 @@ public class Professor extends Pessoa {
         return livrosEmprestados;
     }
 
-
     @Override
     public void exibirDados(){
         System.out.println("Professor: " + getNome() + "\nID: " + getIdProfessor() + "\nDisciplina: " + getDisciplina() +
                 "\nLimite de livros para alugar: " + limiteLivrosProfessor + "\nPrazo de dias para devolução: " + getPrazoDiasEmprestimoProfessor() + " dias.");
     }
-
 
     public void fazerEmprestimo(Livro livro){
         if (!livrosEmprestados.contains(livro) && limiteLivrosProfessor > livrosEmprestados.size()){
@@ -75,16 +67,14 @@ public class Professor extends Pessoa {
         }
     }
 
-
     public void FazerDevolucaoLivro(Livro livro) {
-		if (livrosEmprestados.contains(livro)){
-			System.out.println("Livro devolvido.");
-			livrosEmprestados.remove(livro);
-			limiteLivrosProfessor += 1;
-			livro.devolverLivro();
-		} else {
-			System.out.println("Este livro não foi emprestado.");
-		}
-
-	}
+        if (livrosEmprestados.contains(livro)){
+            System.out.println("Livro devolvido.");
+            livrosEmprestados.remove(livro);
+            limiteLivrosProfessor += 1;
+            livro.devolverLivro();
+        } else {
+            System.out.println("Este livro não foi emprestado.");
+        }
+    }
 }

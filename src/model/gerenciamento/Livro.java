@@ -1,5 +1,4 @@
 package model.gerenciamento;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,7 +11,6 @@ public class Livro {
     private LocalDateTime fimEmprestimo;
     private boolean status;
 
-
     public Livro(String isbn, String nomeLivro, String generoLivro, String autor){
         this.isbn = isbn;
         this.nomeLivro = nomeLivro;
@@ -23,14 +21,10 @@ public class Livro {
         this.status = true;
     }
 
-    public DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
-
     @Override
     public String toString() {
         return nomeLivro + " (ISBN: " + isbn + ")";
     }
-
 
     public String getIsbn() {
         return isbn;
@@ -66,13 +60,11 @@ public class Livro {
         this.fimEmprestimo = LocalDateTime.now().plusDays(prazoDias);
     }
 
-
     public void devolverLivro(){
         this.status = true;
         this.inicioEmprestimo = null;
         this.fimEmprestimo = null;
     }
-
 
     public void dadosLivro(){
         System.out.println("Nome: " + nomeLivro);
@@ -80,9 +72,5 @@ public class Livro {
         System.out.println("Autor: " + autor);
         System.out.println("ISBN: " + isbn);
     }
-
-    
-
-
 
 }
